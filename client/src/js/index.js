@@ -10,7 +10,7 @@ import "../css/index.css";
 import { Tooltip, Toast, Popover } from 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import { initDb, getDb, postDb } from './database';
+import { initDb, getDb, postDb, deleteDb } from './database';
 window.addEventListener('load', function () {
     initDb();
     fetchCards()
@@ -29,7 +29,7 @@ window.addEventListener('load', function () {
     toggleForm()
    })
   
-  form.addEventListener('submit', event => {
+form.addEventListener('submit', event => {
     // Handle data
     event.preventDefault();
   let name = document.getElementById("name").value;
@@ -54,3 +54,12 @@ window.addEventListener('load', function () {
   // Reload the DOM
   fetchCards();
 });
+
+window.deleteCard = (e) => {
+    // Grabs the id from the button element attached to the contact card.
+    let id = parseInt(e.id);
+    // Delete the card
+    deleteDb(id);
+    // Reload the DOM
+    fetchCards();
+};
